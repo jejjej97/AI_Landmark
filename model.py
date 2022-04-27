@@ -84,7 +84,7 @@ model.compile(loss='categorical_crossentropy',   # 최적화 함수 지정
 
 # 학습 완료된 모델 저장
 
-model.fit(X_train, y_train, batch_size=9, epochs = 10)
+model.fit(X_train, y_train, batch_size=9, epochs = 100)
 model.save("landmark_model.h5")
 
 
