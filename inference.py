@@ -9,7 +9,7 @@ model = tf.keras.models.load_model('C:/AI_landmark/landmark_model.h5')
 model.summary()
 
 # 적용해볼 이미지
-test_image = 'C:/AI_landmark/img/test6.jpg'
+test_image = 'C:/AI_landmark/img/test1.jpg'
 # 이미지 resize
 img = Image.open(test_image)
 img = img.convert("RGB")
