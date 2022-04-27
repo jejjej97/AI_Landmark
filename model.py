@@ -44,10 +44,6 @@ Y = np.array(Y)
 X_train, X_test, y_train, y_test = train_test_split(X, Y)
 xy = (X_train, X_test, y_train, y_test)
 
-# print('>>> data 저장중 ...')
-# np.save("./landmarkimg/obj.npy", xy)
-print("ok,", len(Y))
-
 # 데이터 정규화하기(0~1사이로)
 X_train = X_train.astype("float") / 256
 X_test  = X_test.astype("float")  / 256
@@ -86,7 +82,6 @@ model.compile(loss='categorical_crossentropy',   # 최적화 함수 지정
 
 model.fit(X_train, y_train, batch_size=9, epochs = 100)
 model.save("landmark_model.h5")
-
 
 # # 적용해볼 이미지
 # test_image = 'C:/AI_CatProject-master/img/test6.jpg'
