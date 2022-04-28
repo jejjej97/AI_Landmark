@@ -2,7 +2,9 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 
-categories = ['경복궁','광화문','남산타워','청계천','코엑스']
+from label import label_read
+
+categories = label_read()
 
 model = tf.keras.models.load_model('C:/AI_landmark/landmark_model.h5')
 # 모델 구조를 출력합니다

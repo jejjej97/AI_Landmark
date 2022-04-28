@@ -1,5 +1,5 @@
 from PIL import Image
-import os, glob
+import glob
 import numpy as np
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
@@ -8,9 +8,20 @@ from keras.layers import Conv2D
 from keras.layers import Activation, Dropout, Flatten, Dense
 import os
 
+# 라벨 만들기
+class_path = "./landmarkimg/"
+class_list = os.listdir(class_path)
+for i in class_list:
+    image_path = class_path + i
+    image_list = os.listdir(image_path)
+    f = open('landmark_label.csv', 'a', encoding='utf-8')
+    f.write(i+',')
+    f.close()
+print(class_list)
+
 # 분류 대상 카테고리 선택하기 
 accident_dir = "./landmarkimg"
-categories = ['경복궁','광화문','남산타워','청계천','코엑스']
+categories = class_list
 nb_classes = len(categories)
 # 이미지 크기 지정 
 image_w = 64 
@@ -80,20 +91,5 @@ model.compile(loss='categorical_crossentropy',   # 최적화 함수 지정
 
 # 학습 완료된 모델 저장
 
-model.fit(X_train, y_train, batch_size=9, epochs = 100)
+model.fit(X_train, y_train, batch_size=32, epochs = 10)
 model.save("landmark_model.h5")
-
-# # 적용해볼 이미지
-# test_image = 'C:/AI_CatProject-master/img/test6.jpg'
-# # 이미지 resize
-# img = Image.open(test_image)
-# img = img.convert("RGB")
-# img = img.resize((64,64))
-# data = np.asarray(img)
-# X = np.array(data)
-# X = X.astype("float") / 256
-# X = X.reshape(-1, 64, 64,3)
-# # 예측
-# pred = model.predict(X)
-# result = [np.argmax(value) for value in pred]   # 예측 값중 가장 높은 클래스 반환
-# print('New data category : ',categories[result[0]])
